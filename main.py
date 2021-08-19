@@ -28,7 +28,7 @@ while True:
         if select == 1:
             username = input("Kullanıcı adı:")
             password = input("Şifre:")
-            kontrol = IsUserExist(username)
+            kontrol = isuserexist(username)
             if kontrol is None:
                 print("Böyle bir kullanıcı yok")
                 continue
@@ -42,7 +42,7 @@ while True:
                             task = input("Oluşturmak istediğiniz görevi giriniz:")
                             taskpoint = input("Oluşturduğunuz görevin puanını giriniz:")
                             member = username
-                            addTaskData(task, taskpoint, member)
+                            addtaskdata(task, taskpoint, member)
                         elif selecttask == 2:
                             listbydate()
                         elif selecttask == 3:

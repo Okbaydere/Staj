@@ -5,7 +5,7 @@ con.execute("PRAGMA foreign_keys = 1")
 cursor = con.cursor()
 
 
-def createTable():
+def createtable():
     cursor.execute \
         ("CREATE TABLE IF NOT EXISTS member "
          "(Id INTEGER PRIMARY KEY ,"
@@ -15,15 +15,15 @@ def createTable():
         ("CREATE TABLE IF NOT EXISTS "
          "task ("
          "Id INTEGER PRIMARY KEY AUTOINCREMENT , "
-         "userId INTEGER,"
+         "userid INTEGER,"
          "taskName TEXT,"
          "taskPoint INTEGER,"
          "taskDate DATE ,"
-         "FOREIGN KEY (userId) REFERENCES member(Id))")
+         "FOREIGN KEY (userid) REFERENCES member(Id))")
     con.commit()
 
 
-createTable()
+createtable()
 
 
 def adduserdata(userName, userPassword):
@@ -35,17 +35,17 @@ def adduserdata(userName, userPassword):
     con.close()
 
 
-def addTaskData(taskName, taskPoint, member):
+def addtaskdata(taskName, taskPoint, member):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    IdG = getId(member)
-    ekle = "INSERT INTO task(taskName, taskPoint,taskDate,userId)  VALUES ('{}','{}',datetime(),'{}') "
-    cursor.execute(ekle.format(taskName, taskPoint, IdG[0]))
+    idg = getid(member)
+    ekle = "INSERT INTO task(taskName, taskPoint,taskDate,userid)  VALUES ('{}','{}',datetime(),'{}') "
+    cursor.execute(ekle.format(taskName, taskPoint, idg[0]))
     con.commit()
     con.close()
 
 
-def deleteTask(taskName):  # Görev Sil
+def deletetask(taskName):  # Görev Sil
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
     sil = "DELETE FROM task WHERE taskName = '{}' "
@@ -54,7 +54,7 @@ def deleteTask(taskName):  # Görev Sil
     con.close()
 
 
-def IsUserExist(userName):
+def isuserexist(userName):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
     arama = "SELECT * FROM member WHERE userName = '{}'"
@@ -68,7 +68,7 @@ def listbypoint():
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
 
-    cursor.execute("SELECT taskName,taskPoint FROM task WHERE userId=1  ORDER BY taskPoint")
+    cursor.execute("SELECT taskName,taskPoint FROM task WHERE userid=1  ORDER BY taskPoint")
     listele = cursor.fetchall()
     for i in listele:
         print(i)
@@ -78,18 +78,18 @@ def listbypoint():
 def listbydate():
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    cursor.execute("SELECT taskName,taskDate  FROM task WHERE userId=1 ORDER BY taskDate")
+    cursor.execute("SELECT taskName,taskDate  FROM task WHERE userid=1 ORDER BY taskDate")
     listele = cursor.fetchall()
     for i in listele:
         print(i)
     con.close()
 
 
-def getId(userName):
+def getid(userName):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
     get = "SELECT Id FROM member WHERE userName = '{}' LIMIT 1"
     cursor.execute(get.format(userName))
-    userId = cursor.fetchone()
+    userid = cursor.fetchone()
     con.close()
-    return userId
+    return userid
