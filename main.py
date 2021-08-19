@@ -12,7 +12,7 @@ def login():
 
 def taskmenu():
     print("""
-    1-Görev Olustur ve Puan Ver
+    1-Görev Olustur ve puan Ver
     2-Tarihe göre listele
     3-Puana göre listele
     4-Görev Sil
@@ -24,32 +24,32 @@ while True:
 
     login()
     try:
-        secim = int(input("Bir seçim yapınız:"))
-        if secim == 1:
-            kullaniciAdi = input("Kullanıcı adı:")
-            Sifre = input("Sifre:")
-            kontrol = KullaniciVarMi(kullaniciAdi)
+        select = int(input("Bir seçim yapınız:"))
+        if select == 1:
+            username = input("Kullanıcı adı:")
+            password = input("password:")
+            kontrol = KullaniciVarMi(username)
             if kontrol is None:
                 print("Böyle bir kullanıcı yok")
                 continue
-            if Sifre == kontrol[2]:
+            if password == kontrol[2]:
                 while True:
                     taskmenu()
                     try:
 
-                        gorevSecim = int(input("Bir seçim yapınız:"))
-                        if gorevSecim == 1:
-                            gorev = input("Oluşturmak istediğiniz görevi giriniz:")
-                            gorevPuani = input("Oluşturduğunuz görevin puanını giriniz:")
-                            Uye = kullaniciAdi
-                            GorevVeriEkle(gorev, gorevPuani, Uye)
-                        elif gorevSecim == 2:
+                        selecttask = int(input("Bir seçim yapınız:"))
+                        if selecttask == 1:
+                            task = input("Oluşturmak istediğiniz görevi giriniz:")
+                            taskpoint = input("Oluşturduğunuz görevin pointını giriniz:")
+                            member = username
+                            addTaskData(task, taskpoint, member)
+                        elif selecttask == 2:
                             TariheGoreListele()
-                        elif gorevSecim == 3:
-                            PuanaGoreListele()
-                        elif gorevSecim == 4:
+                        elif selecttask == 3:
+                            pointaGoreListele()
+                        elif selecttask == 4:
                             sil = input("Silmek istediğiniz görevin tam adını giriniz:")
-                        elif gorevSecim == 5:
+                        elif selecttask == 5:
                             break
 
                     except ValueError:
@@ -57,12 +57,12 @@ while True:
             else:
                 print("Şifre Hatalı")
 
-        if secim == 2:
-            kullaniciAdi = input("Kullanıcı adı oluştur:")
-            Sifre = input("Şifre oluştur:")
-            UyeVeriEkle(kullaniciAdi, Sifre)
+        if select == 2:
+            username = input("Kullanıcı adı oluştur:")
+            password = input("Şifre oluştur:")
+            adduserdata(username, password)
             print("Kayıt oluşturuldu")
-        if secim == 3:
+        if select == 3:
             break
         else:
             print("Üstteki rakamlardan giriniz lütfen")

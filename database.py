@@ -5,92 +5,91 @@ con.execute("PRAGMA foreign_keys = 1")
 cursor = con.cursor()
 
 
-def tabloolustur():
+def createTable():
     cursor.execute \
-        ("CREATE TABLE IF NOT EXISTS uye "
+        ("CREATE TABLE IF NOT EXISTS member "
          "(Id INTEGER PRIMARY KEY ,"
-         "UyeAdi TEXT,"
-         "UyeSifre TEXT )")
+         "userName TEXT,"
+         "userPassword TEXT )")
     cursor.execute \
         ("CREATE TABLE IF NOT EXISTS "
-         "gorev ("
+         "task ("
          "Id INTEGER PRIMARY KEY AUTOINCREMENT , "
-         "UyeId INTEGER,"
-         "gorevAdi TEXT,"
-         "gorevPuani INTEGER,"
-         "gorevTarihi DATE ,"
-         "FOREIGN KEY (UyeId) REFERENCES uye(Id))")
+         "userId INTEGER,"
+         "taskName TEXT,"
+         "taskPoint INTEGER,"
+         "taskDate DATE ,"
+         "FOREIGN KEY (userId) REFERENCES member(Id))")
     con.commit()
 
 
-tabloolustur()
+createTable()
 
 
-def UyeVeriEkle(UyeAdi, UyeSifre):
+def adduserdata(userName, userPassword):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    ekle = "INSERT INTO uye(UyeAdi, UyeSifre) VALUES ('{}','{}') "
-    cursor.execute(ekle.format(UyeAdi, UyeSifre))
-    con.commit()
-    con.close()
-
-
-def GorevVeriEkle(gorevAdi, gorevPuani, Uye):
-    con = sql.connect('gorevlistesi.db')
-    cursor = con.cursor()
-    IdG = IdGetir(Uye)
-    ekle = "INSERT INTO gorev(gorevAdi, gorevPuani,gorevTarihi,UyeId)  VALUES ('{}','{}',datetime(),'{}') "
-    cursor.execute(ekle.format(gorevAdi, gorevPuani, IdG[0]))
+    ekle = "INSERT INTO member(userName, userPassword) VALUES ('{}','{}') "
+    cursor.execute(ekle.format(userName, userPassword))
     con.commit()
     con.close()
 
 
-def GorevSil(gorevAdi):  # Görev Sil
+def addTaskData(taskName, taskPoint, member):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    sil = "DELETE FROM gorev WHERE gorevAdi = '{}' "
-    cursor.execute(sil.format(gorevAdi))
+    IdG = getId(member)
+    ekle = "INSERT INTO task(taskName, taskPoint,taskDate,userId)  VALUES ('{}','{}',datetime(),'{}') "
+    cursor.execute(ekle.format(taskName, taskPoint, IdG[0]))
     con.commit()
     con.close()
 
 
-def KullaniciVarMi(UyeAdi):
+def deleteTask(taskName):  # Görev Sil
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    arama = "SELECT * FROM uye WHERE UyeAdi = '{}'"
-    cursor.execute(arama.format(UyeAdi))
-    kullanici = cursor.fetchone()
+    sil = "DELETE FROM task WHERE taskName = '{}' "
+    cursor.execute(sil.format(taskName))
+    con.commit()
     con.close()
-    return kullanici
 
 
-def PuanaGoreListele():
+def IsUserExist(userName):
+    con = sql.connect('gorevlistesi.db')
+    cursor = con.cursor()
+    arama = "SELECT * FROM member WHERE userName = '{}'"
+    cursor.execute(arama.format(userName))
+    user = cursor.fetchone()
+    con.close()
+    return user
+
+
+def listbypoint():
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
 
-    cursor.execute("SELECT gorevAdi,gorevPuani FROM gorev WHERE UyeId=1  ORDER BY gorevPuani")
+    cursor.execute("SELECT taskName,taskPoint FROM task WHERE userId=1  ORDER BY taskPoint")
     listele = cursor.fetchall()
     for i in listele:
         print(i)
     con.close()
 
 
-def TariheGoreListele():
+def listbydate():
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    cursor.execute("SELECT gorevAdi,gorevTarihi  FROM gorev WHERE UyeId=1 ORDER BY gorevTarihi")
+    cursor.execute("SELECT taskName,taskDate  FROM task WHERE userId=1 ORDER BY taskDate")
     listele = cursor.fetchall()
     for i in listele:
         print(i)
     con.close()
 
 
-def IdGetir(UyeAdi):
+def getId(userName):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    getir = "SELECT Id FROM uye WHERE UyeAdi = '{}' LIMIT 1"
-    cursor.execute(getir.format(UyeAdi))
-    KullaniciId = cursor.fetchone()
+    get = "SELECT Id FROM member WHERE userName = '{}' LIMIT 1"
+    cursor.execute(get.format(userName))
+    userId = cursor.fetchone()
     con.close()
-    return KullaniciId
-
+    return userId
