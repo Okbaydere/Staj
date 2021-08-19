@@ -27,8 +27,8 @@ while True:
         select = int(input("Bir seçim yapınız:"))
         if select == 1:
             username = input("Kullanıcı adı:")
-            password = input("password:")
-            kontrol = KullaniciVarMi(username)
+            password = input("Şifre:")
+            kontrol = IsUserExist(username)
             if kontrol is None:
                 print("Böyle bir kullanıcı yok")
                 continue
@@ -40,13 +40,13 @@ while True:
                         selecttask = int(input("Bir seçim yapınız:"))
                         if selecttask == 1:
                             task = input("Oluşturmak istediğiniz görevi giriniz:")
-                            taskpoint = input("Oluşturduğunuz görevin pointını giriniz:")
+                            taskpoint = input("Oluşturduğunuz görevin puanını giriniz:")
                             member = username
                             addTaskData(task, taskpoint, member)
                         elif selecttask == 2:
-                            TariheGoreListele()
+                            listbydate()
                         elif selecttask == 3:
-                            pointaGoreListele()
+                            listbydate()
                         elif selecttask == 4:
                             sil = input("Silmek istediğiniz görevin tam adını giriniz:")
                         elif selecttask == 5:
