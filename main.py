@@ -15,7 +15,7 @@ def task_menu():
     1-Görev Olustur ve puan Ver
     2-Tarihe göre listele
     3-Puana göre listele
-    4-Görev Sil
+    4-Görev delete
     5-Ana menüye dön
     """)
 
@@ -28,11 +28,11 @@ while True:
         if select == 1:
             username = input("Kullanıcı adı:")
             password = input("Şifre:")
-            kontrol = isuserexist(username)
-            if kontrol is None:
+            control = isuserexist(username)
+            if control is None:
                 print("Böyle bir kullanıcı yok")
                 continue
-            if password == kontrol[2]:
+            if password == control[2]:
                 while True:
                     task_menu()
                     try:
@@ -44,12 +44,12 @@ while True:
 
                             add_task_data(task, taskpoint, username)
                         elif selecttask == 2:
-                            listbydate()
+                            list_by_date()
                         elif selecttask == 3:
-                            listbydate()
+                            list_by_date()
                         elif selecttask == 4:
-                            sil = input("Silmek istediğiniz görevin tam adını giriniz:")
-                            deletetask(sil)
+                            delete = input("Silmek istediğiniz görevin tam adını giriniz:")
+                            delete_task(delete)
                         elif selecttask == 5:
                             break
 

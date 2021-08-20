@@ -9,30 +9,30 @@ def create_table():
     cursor.execute \
         ("CREATE TABLE IF NOT EXISTS member "
          "(Id INTEGER PRIMARY KEY ,"
-         "userName TEXT,"
-         "userPassword TEXT,"
-         "UNIQUE (userName))")
+         "user_name TEXT,"
+         "user_password TEXT,"
+         "UNIQUE (user_name))")
     cursor.execute \
         ("CREATE TABLE IF NOT EXISTS "
          "task ("
          "Id INTEGER PRIMARY KEY AUTOINCREMENT , "
-         "userid INTEGER,"
-         "taskName TEXT,"
-         "taskPoint INTEGER,"
-         "taskDate DATE ,"
-         "FOREIGN KEY (userid) REFERENCES member(Id))")
+         "user_id INTEGER,"
+         "task_name TEXT,"
+         "task_point INTEGER,"
+         "task_date DATE ,"
+         "FOREIGN KEY (user_id) REFERENCES member(Id))")
     con.commit()
 
 
 create_table()
 
 
-def add_user_data(userName, userPassword):
+def add_user_data(user_name, user_password):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
     try:
-        ekle = "INSERT INTO member(userName, userPassword) VALUES ('{}','{}') "
-        cursor.execute(ekle.format(userName, userPassword))
+        ekle = "INSERT INTO member(user_name, user_password) VALUES ('{}','{}') "
+        cursor.execute(ekle.format(user_name, user_password))
         con.commit()
     except:
         print("Aynı isimde farklı bir üye var!")
@@ -40,61 +40,61 @@ def add_user_data(userName, userPassword):
     con.close()
 
 
-def add_task_data(taskName, taskPoint, member):
+def add_task_data(task_name, task_point, member):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    idg = getid(member)
-    ekle = "INSERT INTO task(taskName, taskPoint,taskDate,userid)  VALUES ('{}','{}',datetime(),'{}') "
-    cursor.execute(ekle.format(taskName, taskPoint, idg[0]))
+    idg = get_id(member)
+    ekle = "INSERT INTO task(task_name, task_point,task_date,user_id)  VALUES ('{}','{}',datetime(),'{}') "
+    cursor.execute(ekle.format(task_name, task_point, idg[0]))
     con.commit()
     con.close()
 
 
-def deletetask(taskName):  # Görev Sil
+def delete_task(task_name):  # Görev Sil
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    sil = "DELETE FROM task WHERE taskName = '{}' "
-    cursor.execute(sil.format(taskName))
+    delete = "DELETE FROM task WHERE task_name = '{}' "
+    cursor.execute(delete.format(task_name))
     con.commit()
     con.close()
 
 
-def isuserexist(userName):
+def is_user_exist(user_name):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    arama = "SELECT * FROM member WHERE userName = '{}'"
-    cursor.execute(arama.format(userName))
+    search = "SELECT * FROM member WHERE user_name = '{}'"
+    cursor.execute(search.format(user_name))
     user = cursor.fetchone()
     con.close()
     return user
 
 
-def listbypoint():
+def list_by_point():
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
 
-    cursor.execute("SELECT taskName,taskPoint FROM task ORDER BY taskPoint")
+    cursor.execute("SELECT task_name,task_point FROM task ORDER BY task_point")
+    listing = cursor.fetchall()
+    for i in listing:
+        print(i)
+    con.close()
+
+
+def list_by_date():
+    con = sql.connect('gorevlistesi.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT task_name,task_date  FROM task ORDER BY task_date")
     listele = cursor.fetchall()
     for i in listele:
         print(i)
     con.close()
 
 
-def listbydate():
+def get_id(user_name):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    cursor.execute("SELECT taskName,taskDate  FROM task ORDER BY taskDate")
-    listele = cursor.fetchall()
-    for i in listele:
-        print(i)
+    get = "SELECT Id FROM member WHERE user_name = '{}' LIMIT 1"
+    cursor.execute(get.format(user_name))
+    user_id = cursor.fetchone()
     con.close()
-
-
-def getid(userName):
-    con = sql.connect('gorevlistesi.db')
-    cursor = con.cursor()
-    get = "SELECT Id FROM member WHERE userName = '{}' LIMIT 1"
-    cursor.execute(get.format(userName))
-    userid = cursor.fetchone()
-    con.close()
-    return userid
+    return user_id
