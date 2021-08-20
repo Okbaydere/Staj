@@ -10,7 +10,7 @@ def login():
     """)
 
 
-def taskmenu():
+def task_menu():
     print("""
     1-Görev Olustur ve puan Ver
     2-Tarihe göre listele
@@ -34,21 +34,22 @@ while True:
                 continue
             if password == kontrol[2]:
                 while True:
-                    taskmenu()
+                    task_menu()
                     try:
 
                         selecttask = int(input("Bir seçim yapınız:"))
                         if selecttask == 1:
                             task = input("Oluşturmak istediğiniz görevi giriniz:")
                             taskpoint = input("Oluşturduğunuz görevin puanını giriniz:")
-                            member = username
-                            addtaskdata(task, taskpoint, member)
+
+                            add_task_data(task, taskpoint, username)
                         elif selecttask == 2:
                             listbydate()
                         elif selecttask == 3:
                             listbydate()
                         elif selecttask == 4:
                             sil = input("Silmek istediğiniz görevin tam adını giriniz:")
+                            deletetask(sil)
                         elif selecttask == 5:
                             break
 
@@ -60,7 +61,7 @@ while True:
         if select == 2:
             username = input("Kullanıcı adı oluştur:")
             password = input("Şifre oluştur:")
-            adduserdata(username, password)
+            add_user_data(username, password)
         if select == 3:
             break
 

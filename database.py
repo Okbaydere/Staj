@@ -5,7 +5,7 @@ con.execute("PRAGMA foreign_keys = 1")
 cursor = con.cursor()
 
 
-def createtable():
+def create_table():
     cursor.execute \
         ("CREATE TABLE IF NOT EXISTS member "
          "(Id INTEGER PRIMARY KEY ,"
@@ -24,10 +24,10 @@ def createtable():
     con.commit()
 
 
-createtable()
+create_table()
 
 
-def adduserdata(userName, userPassword):
+def add_user_data(userName, userPassword):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
     try:
@@ -40,7 +40,7 @@ def adduserdata(userName, userPassword):
     con.close()
 
 
-def addtaskdata(taskName, taskPoint, member):
+def add_task_data(taskName, taskPoint, member):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
     idg = getid(member)
