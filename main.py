@@ -61,10 +61,8 @@ while True:
             username = input("Kullanıcı adı oluştur:")
             password = input("Şifre oluştur:")
             adduserdata(username, password)
-            print("Kayıt oluşturuldu")
         if select == 3:
             break
-        else:
-            print("Üstteki rakamlardan giriniz lütfen")
+
     except ValueError:
         print("Rakam gir")

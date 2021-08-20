@@ -10,7 +10,8 @@ def createtable():
         ("CREATE TABLE IF NOT EXISTS member "
          "(Id INTEGER PRIMARY KEY ,"
          "userName TEXT,"
-         "userPassword TEXT )")
+         "userPassword TEXT,"
+         "UNIQUE (userName))")
     cursor.execute \
         ("CREATE TABLE IF NOT EXISTS "
          "task ("
@@ -29,9 +30,13 @@ createtable()
 def adduserdata(userName, userPassword):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    ekle = "INSERT INTO member(userName, userPassword) VALUES ('{}','{}') "
-    cursor.execute(ekle.format(userName, userPassword))
-    con.commit()
+    try:
+        ekle = "INSERT INTO member(userName, userPassword) VALUES ('{}','{}') "
+        cursor.execute(ekle.format(userName, userPassword))
+        con.commit()
+    except:
+        print("Aynı isimde farklı bir üye var!")
+
     con.close()
 
 
@@ -68,7 +73,7 @@ def listbypoint():
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
 
-    cursor.execute("SELECT taskName,taskPoint FROM task WHERE userid=1  ORDER BY taskPoint")
+    cursor.execute("SELECT taskName,taskPoint FROM task ORDER BY taskPoint")
     listele = cursor.fetchall()
     for i in listele:
         print(i)
@@ -78,7 +83,7 @@ def listbypoint():
 def listbydate():
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    cursor.execute("SELECT taskName,taskDate  FROM task WHERE userid=1 ORDER BY taskDate")
+    cursor.execute("SELECT taskName,taskDate  FROM task ORDER BY taskDate")
     listele = cursor.fetchall()
     for i in listele:
         print(i)
