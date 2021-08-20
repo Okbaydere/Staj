@@ -28,7 +28,7 @@ while True:
         if select == 1:
             username = input("Kullanıcı adı:")
             password = input("Şifre:")
-            control = isuserexist(username)
+            control = is_user_exist(username)
             if control is None:
                 print("Böyle bir kullanıcı yok")
                 continue
@@ -37,20 +37,20 @@ while True:
                     task_menu()
                     try:
 
-                        selecttask = int(input("Bir seçim yapınız:"))
-                        if selecttask == 1:
+                        select_task = int(input("Bir seçim yapınız:"))
+                        if select_task == 1:
                             task = input("Oluşturmak istediğiniz görevi giriniz:")
-                            taskpoint = input("Oluşturduğunuz görevin puanını giriniz:")
+                            task_point = input("Oluşturduğunuz görevin puanını giriniz:")
 
-                            add_task_data(task, taskpoint, username)
-                        elif selecttask == 2:
+                            add_task_data(task, task_point, username)
+                        elif select_task == 2:
                             list_by_date()
-                        elif selecttask == 3:
+                        elif select_task == 3:
                             list_by_date()
-                        elif selecttask == 4:
+                        elif select_task == 4:
                             delete = input("Silmek istediğiniz görevin tam adını giriniz:")
                             delete_task(delete)
-                        elif selecttask == 5:
+                        elif select_task == 5:
                             break
 
                     except ValueError:
