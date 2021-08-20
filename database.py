@@ -31,8 +31,8 @@ def add_user_data(user_name, user_password):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
     try:
-        ekle = "INSERT INTO member(user_name, user_password) VALUES ('{}','{}') "
-        cursor.execute(ekle.format(user_name, user_password))
+        add = "INSERT INTO member(user_name, user_password) VALUES ('{}','{}') "
+        cursor.execute(add.format(user_name, user_password))
         con.commit()
     except:
         print("Aynı isimde farklı bir üye var!")
@@ -43,18 +43,18 @@ def add_user_data(user_name, user_password):
 def add_task_data(task_name, task_point, member):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    idg = get_id(member)
-    ekle = "INSERT INTO task(task_name, task_point,task_date,user_id)  VALUES ('{}','{}',datetime(),'{}') "
-    cursor.execute(ekle.format(task_name, task_point, idg[0]))
+    idg = get_id_user(member)
+    add = "INSERT INTO task(task_name, task_point,task_date,user_id)  VALUES ('{}','{}',datetime(),'{}') "
+    cursor.execute(add.format(task_name, task_point, idg[0]))
     con.commit()
     con.close()
 
 
-def delete_task(task_name):  # Görev Sil
+def delete_task(task_Id):  # Görev Sil
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    delete = "DELETE FROM task WHERE task_name = '{}' "
-    cursor.execute(delete.format(task_name))
+    delete = "DELETE FROM task WHERE Id = '{}' "
+    cursor.execute(delete.format(task_Id))
     con.commit()
     con.close()
 
@@ -84,13 +84,13 @@ def list_by_date():
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
     cursor.execute("SELECT task_name,task_date  FROM task ORDER BY task_date")
-    listele = cursor.fetchall()
-    for i in listele:
+    listing = cursor.fetchall()
+    for i in listing:
         print(i)
     con.close()
 
 
-def get_id(user_name):
+def get_id_user(user_name):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
     get = "SELECT Id FROM member WHERE user_name = '{}' LIMIT 1"

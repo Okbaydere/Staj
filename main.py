@@ -27,7 +27,7 @@ def add_data():
 
 
 def task(select_task):
-    while True:
+
         if select_task == 1:
             task = input("Oluşturmak istediğiniz görevi giriniz:")
             task_point = input("Oluşturduğunuz görevin puanını giriniz:")
@@ -37,9 +37,10 @@ def task(select_task):
         elif select_task == 3:
             list_by_point()
         elif select_task == 4:
-            continue
-        elif select_task == 5:
-            break
+            delete = int(input("Silmek istediğiniz görevin tam adını giriniz"))
+            delete_task(delete)
+
+
 
 
 while True:
@@ -55,10 +56,13 @@ while True:
                 print("Böyle bir kullanıcı yok")
                 continue
             if password == control[2]:
+                while True:
                     task_menu()
                     try:
                         select_task = int(input("Bir seçim yapınız:"))
                         task(select_task)
+                        if select_task == 5:
+                            break
                     except ValueError:
                         print("Lütfen rakam giriniz")
             else:
