@@ -18,7 +18,7 @@ def create_table():
          "Id INTEGER PRIMARY KEY AUTOINCREMENT , "
          "user_id INTEGER,"
          "task_name TEXT,"
-         "task_point INTEGER,"
+         "task_point INTEGER CHECK ( typeof('integer') ),"
          "task_date DATE ,"
          "FOREIGN KEY (user_id) REFERENCES member(Id))")
     con.commit()
@@ -44,9 +44,13 @@ def add_task_data(task_name, task_point, member):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
     idg = is_user_exist(member)
-    add = "INSERT INTO task(task_name, task_point,task_date,user_id)  VALUES ('{}','{}',datetime(),'{}') "
-    cursor.execute(add.format(task_name, task_point, idg[0]))
-    con.commit()
+    try:
+        add = "INSERT INTO task(task_name, task_point,task_date,user_id)  VALUES ('{}','{}',datetime(),'{}') "
+        cursor.execute(add.format(task_name, task_point, idg[0]))
+        con.commit()
+    except:
+        print("Puana rakamdan başka bir şey girmeyiniz")
+
     con.close()
 
 
