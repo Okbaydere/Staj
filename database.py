@@ -98,3 +98,13 @@ def get_id_user(user_name):
     user_id = cursor.fetchone()
     con.close()
     return user_id
+
+def showid():
+    con = sql.connect('gorevlistesi.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT Id,task_name  FROM task")
+    listing = cursor.fetchall()
+    for i in listing:
+        print(i)
+    con.close()
+

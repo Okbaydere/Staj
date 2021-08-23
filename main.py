@@ -15,8 +15,9 @@ def task_menu():
     1-Görev Olustur ve puan Ver
     2-Tarihe göre listele
     3-Puana göre listele
-    4-Görev delete
-    5-Ana menüye dön
+    4-Görevlerin ID'sini gör
+    5-Görev sil
+    6-Ana menüye dön
     """)
 
 
@@ -37,7 +38,9 @@ def task(select_task):
         elif select_task == 3:
             list_by_point()
         elif select_task == 4:
-            delete = int(input("Silmek istediğiniz görevin tam adını giriniz"))
+            showid()
+        elif select_task == 5:
+            delete = int(input("Silmek istediğiniz görevin ID'sini giriniz:"))
             delete_task(delete)
 
 
@@ -61,7 +64,7 @@ while True:
                     try:
                         select_task = int(input("Bir seçim yapınız:"))
                         task(select_task)
-                        if select_task == 5:
+                        if select_task == 6:
                             break
                     except ValueError:
                         print("Lütfen rakam giriniz")
