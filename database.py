@@ -69,23 +69,26 @@ def is_user_exist(user_name):
     return user
 
 
-def list_by_point():
+def list_by_point(control):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
 
-    cursor.execute("SELECT task_name,task_point FROM task ORDER BY task_point")
-    listing = cursor.fetchall()
-    for i in listing:
+    listing = "SELECT task_name,task_point FROM task WHERE user_id = '{}' ORDER BY task_point"
+    cursor.execute(listing.format(control))
+    lbp = cursor.fetchall() #list by point
+    for i in lbp:
         print(i)
     con.close()
 
 
-def list_by_date():
+def list_by_date(control):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    cursor.execute("SELECT task_name,task_date  FROM task ORDER BY task_date")
-    listing = cursor.fetchall()
-    for i in listing:
+
+    listing = "SELECT task_name,task_date FROM task WHERE user_id = '{}' ORDER BY datetime()"
+    cursor.execute(listing.format(control))
+    lbd = cursor.fetchall()  # list by date
+    for i in lbd:
         print(i)
     con.close()
 
@@ -99,12 +102,15 @@ def get_id_user(user_name):
     con.close()
     return user_id
 
-def showid():
-    con = sql.connect('gorevlistesi.db')
-    cursor = con.cursor()
-    cursor.execute("SELECT Id,task_name  FROM task")
-    listing = cursor.fetchall()
-    for i in listing:
-        print(i)
-    con.close()
 
+def showid(control):
+    def list_by_date(control):
+        con = sql.connect('gorevlistesi.db')
+        cursor = con.cursor()
+
+        listing = "SELECT Id,task_name FROM task WHERE user_id = '{}'"
+        cursor.execute(listing.format(control))
+        lbi = cursor.fetchall()  # list by ID
+        for i in lbi:
+            print(i)
+        con.close()

@@ -27,23 +27,20 @@ def add_data():
     add_user_data(username, password)
 
 
-def task(select_task):
-
-        if select_task == 1:
-            task = input("Oluşturmak istediğiniz görevi giriniz:")
-            task_point = input("Oluşturduğunuz görevin puanını giriniz:")
-            add_task_data(task, task_point, username)
-        elif select_task == 2:
-            list_by_date()
-        elif select_task == 3:
-            list_by_point()
-        elif select_task == 4:
-            showid()
-        elif select_task == 5:
-            delete = int(input("Silmek istediğiniz görevin ID'sini giriniz:"))
-            delete_task(delete)
-
-
+def task_list(select_task):
+    if select_task == 1:
+        task = input("Oluşturmak istediğiniz görevi giriniz:")
+        task_point = input("Oluşturduğunuz görevin puanını giriniz:")
+        add_task_data(task, task_point, username)
+    elif select_task == 2:
+        list_by_date(control[0])
+    elif select_task == 3:
+        list_by_point(control[0])
+    elif select_task == 4:
+        showid(control[0])
+    elif select_task == 5:
+        delete = int(input("Silmek istediğiniz görevin ID'sini giriniz:"))
+        delete_task(delete)
 
 
 while True:
@@ -63,7 +60,7 @@ while True:
                     task_menu()
                     try:
                         select_task = int(input("Bir seçim yapınız:"))
-                        task(select_task)
+                        task_list(select_task)
                         if select_task == 6:
                             break
                     except ValueError:
