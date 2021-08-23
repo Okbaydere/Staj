@@ -104,7 +104,6 @@ def get_id_user(user_name):
 
 
 def showid(control):
-    def list_by_date(control):
         con = sql.connect('gorevlistesi.db')
         cursor = con.cursor()
 

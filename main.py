@@ -65,7 +65,7 @@ while True:
                             break
                     except ValueError:
                         print("Lütfen rakam giriniz")
-            else:
+            elif password != control[2]:
                 print("Şifre Hatalı")
 
         if select == 2:
@@ -73,5 +73,6 @@ while True:
         if select == 3:
             break
 
+
     except ValueError:
-        print("Rakam gir")
+        print("Lütfen rakam girin")
