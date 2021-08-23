@@ -30,8 +30,10 @@ def add_data():
 def task_list(select_task):
     if select_task == 1:
         task = input("Oluşturmak istediğiniz görevi giriniz:")
-        task_point = input("Oluşturduğunuz görevin puanını giriniz:")
+        task_point = int(input("Oluşturduğunuz görevin puanını giriniz:"))
         add_task_data(task, task_point, username)
+
+
     elif select_task == 2:
         list_by_date(control[0])
     elif select_task == 3:
