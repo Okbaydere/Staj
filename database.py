@@ -43,7 +43,7 @@ def add_user_data(user_name, user_password):
 def add_task_data(task_name, task_point, member):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    idg = get_id_user(member)
+    idg = is_user_exist(member)
     add = "INSERT INTO task(task_name, task_point,task_date,user_id)  VALUES ('{}','{}',datetime(),'{}') "
     cursor.execute(add.format(task_name, task_point, idg[0]))
     con.commit()
@@ -75,7 +75,7 @@ def list_by_point(control):
 
     listing = "SELECT task_name,task_point FROM task WHERE user_id = '{}' ORDER BY task_point"
     cursor.execute(listing.format(control))
-    lbp = cursor.fetchall() #list by point
+    lbp = cursor.fetchall()  # list by point
     for i in lbp:
         print(i)
     con.close()
@@ -92,24 +92,13 @@ def list_by_date(control):
         print(i)
     con.close()
 
-
-def get_id_user(user_name):
+def show_id(control):
     con = sql.connect('gorevlistesi.db')
     cursor = con.cursor()
-    get = "SELECT Id FROM member WHERE user_name = '{}' LIMIT 1"
-    cursor.execute(get.format(user_name))
-    user_id = cursor.fetchone()
+
+    listing = "SELECT Id,task_name FROM task WHERE user_id = '{}'"
+    cursor.execute(listing.format(control))
+    lbi = cursor.fetchall()  # list by ID
+    for i in lbi:
+        print(i)
     con.close()
-    return user_id
-
-
-def showid(control):
-        con = sql.connect('gorevlistesi.db')
-        cursor = con.cursor()
-
-        listing = "SELECT Id,task_name FROM task WHERE user_id = '{}'"
-        cursor.execute(listing.format(control))
-        lbi = cursor.fetchall()  # list by ID
-        for i in lbi:
-            print(i)
-        con.close()

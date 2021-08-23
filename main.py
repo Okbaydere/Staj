@@ -37,7 +37,7 @@ def task_list(select_task):
     elif select_task == 3:
         list_by_point(control[0])
     elif select_task == 4:
-        showid(control[0])
+        show_id(control[0])
     elif select_task == 5:
         delete = int(input("Silmek istediğiniz görevin ID'sini giriniz:"))
         delete_task(delete)
