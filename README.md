@@ -1,0 +1,2 @@
+# staj
+Stajda verilen gorevler
