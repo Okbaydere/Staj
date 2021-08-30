@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}Görevler{% endblock %} {% block content %}
+    <h1 align="center">Görevler</h1>
+
+    <table id=notes class="table table-striped table-bordered table-sm tablesorter" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th class="th-sm">Görev
+            </th>
+            <th class="th-sm">Puanı
+            </th>
+            <th class="th-sm">Eklendiği tarih
+            </th>
+        </tr>
+        </thead>
+     <tbody>
+        {% for note in user.notes %}
+
+            <tr>
+                <td> {{ note.data }}</td>
+                <td>{{ note.task_point }}</td>
+                <td>{{ note.date }}</td>
+                <td> <button type="button" class="close" onClick="deleteNote({{ note.id }})">x</button></td>
+
+            </tr>
+
+
+        {% endfor %}
+     </tbody>
+    </table>
+    <form method="POST">
+        <div class="">
+            <textarea name="note" id="note" class="form-control"
+                      placeholder="Eklemek istediğiniz Notu giriniz"></textarea>
+            <input name="score" id="score" type="number" placeholder="Eklemek istediğiniz skoru giriniz">
+            <div align="center">
+                <button type="submit" class="btn btn-primary">Add Note</button>
+            </div>
+        </div>
+
+
+    </form>
+{% endblock %}
+
