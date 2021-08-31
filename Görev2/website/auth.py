@@ -17,13 +17,12 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
-                flash('Incorrect password, try again.', category='error')
+                flash('Parolanızı yanlış girdiniz lütfen tekrar deneyin.', category='error')
         else:
-            flash('Email does not exist.', category='error')
+            flash('Böyle bir email yok.', category='error')
 
     return render_template("login.html", user=current_user)
 
@@ -44,9 +43,9 @@ def sign_up():
 
         user = User.query.filter_by(email=email).first()
         if user:
-            flash('Email already exists.', category='error')
+            flash('Böyle bir email zaten var.', category='error')
         elif len(email) < 4:
-            flash('Email must be greater than 3 characters.', category='error')
+            flash('Email en az 4 karakterden oluşmalı.', category='error')
         elif len(first_name) < 2:
             flash('First name must be greater than 1 character.', category='error')
 
