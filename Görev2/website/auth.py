@@ -11,7 +11,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form.get('email')
+        email = request.body
         password = request.form.get('password')
 
         user = User.query.filter_by(email=email).first()
@@ -45,19 +45,19 @@ def sign_up():
         if user:
             flash('Böyle bir email zaten var.', category='error')
         elif len(email) < 4:
-            flash('Email en az 4 karakterden oluşmalı.', category='error')
+            flash('Email en az 4 karakterden oluşmalıdır.', category='error')
         elif len(first_name) < 2:
-            flash('First name must be greater than 1 character.', category='error')
+            flash('İsim en az 2 karakterden oluşmalıdır.', category='error')
 
         elif len(password) < 7:
-            flash('Password must be at least 7 characters.', category='error')
+            flash('Şifre en az 7 karakterden oluşmalıdır.', category='error')
         else:
             new_user = User(email=email, first_name=first_name, password=generate_password_hash(
                 password, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash('Account created!', category='success')
+            flash('Hesap oluşturuldu!', category='success')
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
