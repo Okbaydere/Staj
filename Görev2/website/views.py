@@ -11,19 +11,18 @@ views = Blueprint('views', __name__)
 @login_required
 def home():
     if request.method == 'POST':
-        note = request.get_json()
-        score = request.get_json()
-        if note.length < 1 or len(score) < 1:
-            flash('Not veya score boş bırakılamaz', category='error')
-        else:
-            new_note = Task(data=note, task_point=score, user_id=current_user.id)
-            db.session.add(new_note)
-            db.session.commit()
+        req = request.get_json()
+        note = req['note']
+        score = req['score']
+
+        new_note = Task(data=note, task_point=score, user_id=current_user.id)
+        db.session.add(new_note)
+        db.session.commit()
 
     return render_template("home.html", user=current_user, name=current_user.first_name)
 
 
-@views.route('/<int:task_id>', methods=['POST'])
+@views.route('/<int:task_id>', methods=['DELETE'])
 @login_required
 def delete_note(task_id):
     response = {}
