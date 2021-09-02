@@ -1,3 +1,6 @@
+Kodun amacı kullanıcı girişi ile ToDoApp yapıp oluşturduğumuz notları puanlamak.</br>
+Notlar skor ve alfabaye göre sıralanabiliyor.</br>
+
 Kullanmaya başlamadan önce 
 ```
 pip install -r requirements.txt
