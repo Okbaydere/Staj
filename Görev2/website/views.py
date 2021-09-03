@@ -12,11 +12,8 @@ views = Blueprint('views', __name__)
 def home():
     if request.method == 'POST':
         req = request.json
-        note = request.headers.get('note')
-        print("note : " + note)
-        score = request.headers.get('score')
-        print("score : " + score)
-
+        note = request.values.get('note')
+        score = request.values.get('score')
         new_note = Task(data=note, task_point=score, user_id=current_user.id)
         db.session.add(new_note)
         db.session.commit()
