@@ -11,9 +11,11 @@ views = Blueprint('views', __name__)
 @login_required
 def home():
     if request.method == 'POST':
-        req = request.get_json()
-        note = req['note']
-        score = req['score']
+        req = request.json
+        note = request.headers.get('note')
+        print("note : " + note)
+        score = request.headers.get('score')
+        print("score : " + score)
 
         new_note = Task(data=note, task_point=score, user_id=current_user.id)
         db.session.add(new_note)
@@ -32,4 +34,7 @@ def delete_note(task_id):
         if task.user_id == current_user.id:
             db.session.delete(task)
             db.session.commit()
-            return 201
+            return {
+                "success": True,
+                "message": "delete success"
+            }
