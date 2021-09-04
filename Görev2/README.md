@@ -5,15 +5,18 @@ Kullanmaya başlamadan önce
 ```
 pip install -r requirements.txt
 ```
-komutunu giriniz.
-Çalıştırdıktan sonra Kayıt olup giriş yapın. Şu anlık browser üzerinden not eklerken sorun yaşanıyor. O yüzden Api ile denenmeli. </br>
-http://127.0.0.1:5000/sign-up --> Kayıt olmak için </br>
-http://127.0.0.1:5000/login --> Giriş yapmak için </br>
-Giriş yaptıktan sonra http://127.0.0.1:5000/ 'a  yönlendirileceksiniz. Burada not eklemek için POST metodu ile Headers'a Key olarak note , score girin</br>
-
-
+komutunu giriniz.</br>
+# Postman ile kullanmak için aşağıdaki adımları izleyin. </br>
+`http://127.0.0.1:5000/sign-up` --> Kayıt olmak için GET ile bu url'ye gelin. Body x-www-form-urlencoded 'a girip Key yerine sırasıyla` email,firstName,password` ve değerlerini girin </br>
+`http://127.0.0.1:5000/login `--> Giriş yapmak için GET ile bu url'ye gelin. Body x-www-form-urlencoded 'a girip Key yerine sırasıyla `email ve password` daha sonra da değerlerini girin </br>
+Giriş yaptıktan sonra` http://127.0.0.1:5000/` 'a  yönlendirileceksiniz. Burada not eklemek için POST metodu ile parametre olarak KEY'e `note , score` daha sonra da değerleri girin.</br>
 Eğer oluşturduğunuz notu silmek istiyorsanız. Api üzerinden DELETE metodu ile http://127.0.0.1:5000/silmekistediğinizId'yi giriniz. Örneğin 7 numaralı id'yi silmek istiyorsunuz
-http://127.0.0.1:5000/7 şeklinde çağırın.
+`http://127.0.0.1:5000/7` şeklinde çağırın.
+</br>
+</br>
+Koddaki login,logout ve sign up işlemleri **auth.py**'de </br>
+Delete ve add task işlemleri **views.py**'de</br>
+Bütün java kodları **base.html'**'de bulunmakta.
 
 
 
