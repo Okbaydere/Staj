@@ -25,5 +25,17 @@
         </library>
       </libraries>
     </data-source>
+    <data-source source="LOCAL" name="gorevlistesi [2]" uuid="c031f353-c020-4b70-a913-c761406be7d7">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Oguz Kaaan\PycharmProjects\staj\Görev1\gorevlistesi.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+      <libraries>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
+        </library>
+      </libraries>
+    </data-source>
   </component>
 </project>

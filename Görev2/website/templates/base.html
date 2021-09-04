@@ -80,6 +80,20 @@ messages %} {% for category, message in messages %} {% if category ==
         });
     })
 </script>
+<script>
+       $('.remove').click(function () {
+        const remove = $(this);
+        $.ajax({
+            type: 'DELETE',
+            url: '/' + remove.data('source'),
+            success: function (res) {
+                console.log(res.response)
+                location.reload();
+            }
+        });
+    });
+
+</script>
 
 
 <script src="../static/js/bootstrap.bundle.min.js"></script>

@@ -25,7 +25,9 @@
         <td>{{ note.date }}</td>
         <td>{{note.id}}</td>
         <td>
-            <button id="deleteTask" type="button" class="close" onClick="deleteNote({{ task_id }})">x</button>
+            <button class="btn btn-outline-secondary btn-sm remove" data-source="{{note.id}}"
+                    type="button"><i class="fa fa-trash fa-1" aria-hidden="true"></i>
+            </button>
         </td>
 
     </tr>
@@ -36,12 +38,12 @@
 </table>
 
 <form action="" id="addTask">
-<div class="">
-    <textarea name="note" id="note" class="form-control" placeholder="Eklemek istediğiniz Notu giriniz"></textarea>
-    <input name="score" id="score" type="number" placeholder="Eklemek istediğiniz skoru giriniz">
-    <div align="center">
-        <button type="submit" class="btn btn-primary">Add Note</button>
+    <div class="">
+        <textarea name="note" id="note" class="form-control" placeholder="Eklemek istediğiniz Notu giriniz"></textarea>
+        <input name="score" id="score" type="number" placeholder="Eklemek istediğiniz skoru giriniz" >
+        <div align="center">
+            <button type="submit" class="btn btn-primary">Add Note</button>
+        </div>
     </div>
-</div>
-    </form>
+</form>
 {% endblock %}
