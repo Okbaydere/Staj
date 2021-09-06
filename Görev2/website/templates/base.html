@@ -54,12 +54,13 @@ messages %} {% for category, message in messages %} {% if category ==
 {% endif %} {% endfor %} {% endif %} {% endwith %}
 
 <div class="container">{% block content %} {% endblock %}</div>
-<script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+
 <script>
     $(function () {
-        $('#notes').tablesorter();
+        $('#sort').tablesorter();
     });
 </script>
+
 <script type="text/javascript">
     $('#addTask').submit(function AddTask() {
         $.ajax({
@@ -80,12 +81,14 @@ messages %} {% for category, message in messages %} {% if category ==
         });
     })
 </script>
+
+
 <script>
-       $('.remove').click(function () {
+    $('.remove').click(function () {
         const remove = $(this);
         $.ajax({
             type: 'DELETE',
-            url: '/' + remove.data('source'),
+            url: 'http://127.0.0.1:5000/' + remove.data('source'),
             success: function (res) {
                 console.log(res.response)
                 location.reload();
@@ -94,6 +97,8 @@ messages %} {% for category, message in messages %} {% if category ==
     });
 
 </script>
+
+
 
 
 <script src="../static/js/bootstrap.bundle.min.js"></script>
