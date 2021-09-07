@@ -11,7 +11,7 @@ komutunu giriniz.</br>
 `http://127.0.0.1:5000/login `--> Giriş yapmak için GET ile bu url'ye gelin. Body x-www-form-urlencoded 'a girip Key yerine sırasıyla `email ve password` daha sonra da değerlerini girin </br>
 Giriş yaptıktan sonra` http://127.0.0.1:5000/` 'a  yönlendirileceksiniz. Burada not eklemek için POST metodu ile parametre olarak KEY'e `note , score` daha sonra da değerleri girin.</br>
 Eğer oluşturduğunuz notu silmek istiyorsanız. Api üzerinden DELETE metodu ile http://127.0.0.1:5000/delete/silmekistediğinizId'yi giriniz. Örneğin 7 numaralı id'yi silmek istiyorsunuz
-`http://127.0.0.1:5000/delete/7` şeklinde çağırın.
+`http://127.0.0.1:5000/delete/7` şeklinde çağırın. </br>
 Eğer istediğiniz tabloyu değiştirmek isterseniz ise http://127.0.0.1:5000/edit/düzenlemekistediğinizId'yi giriniz.Post metoduyla parametre olarak updated_note,updated_score olarak istediğiniz değerleri giriniz
 </br>
 </br>
