@@ -21,8 +21,8 @@
     {% for note in user.notes %}
 
     <tr>
-        <td > {{ note.data }}</td>
-        <td >{{ note.task_point }}</td>
+        <td> {{ note.data }}</td>
+        <td>{{ note.task_point }}</td>
         <td>{{ note.date }}</td>
         <td>{{note.id}}</td>
         <td>
@@ -31,7 +31,12 @@
             </button>
         </td>
         <td>
-            <button id="update" class="btn btn-outline-secondary btn-sm " data-source="{{note.id}}"> Güncelle</button>
+            <form method="POST" class="update" action="http://127.0.0.1:5000/edit/{{note.id}}">
+
+                <input type="text" value="{{note.data}}" name="updated_note">
+                <input type="number" value="{{note.task_point}}" name="updated_score">
+                <input type="submit" value="Update">
+            </form>
         </td>
 
     </tr>

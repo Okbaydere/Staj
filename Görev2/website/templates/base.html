@@ -83,12 +83,34 @@ messages %} {% for category, message in messages %} {% if category ==
 </script>
 
 
+<script type="text/javascript">
+    $('#updateNote').submit(function updateTask() {
+        $.ajax({
+            url: 'http://127.0.0.1:5000/edit/',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                'updated_note': $("#updated_note").val(),
+                'updated_score': $("#updated_score").val()
+            },
+            success: function (data) {
+                console.log('Data has been posted');
+                console.log(data);
+            },
+            error: function (err) {
+                console.log("Error is: " + err.statusText);
+            }
+        });
+    })
+</script>
+
+
 <script>
     $('.remove').click(function () {
         const remove = $(this);
         $.ajax({
             type: 'DELETE',
-            url: 'http://127.0.0.1:5000/' + remove.data('source'),
+            url: 'http://127.0.0.1:5000/delete/' + remove.data('source'),
             success: function (res) {
                 console.log(res.response)
                 location.reload();

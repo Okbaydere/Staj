@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request,redirect
 from flask_login import login_required, current_user
 
 from . import db
@@ -22,7 +22,7 @@ def home():
     return render_template("home.html", user=current_user, name=current_user.first_name)
 
 
-@views.route('/<int:task_id>', methods=['DELETE'])
+@views.route('/delete/<int:task_id>', methods=['DELETE'])
 @login_required
 def delete_note(task_id):
     response = {}
@@ -38,7 +38,7 @@ def delete_note(task_id):
             }
 
 
-@views.route('/<int:task_id>', methods=['POST'])
+@views.route('/edit/<int:task_id>', methods=['POST'])
 @login_required
 def edit_task(task_id):
     task = Task.query.get(task_id)
@@ -50,7 +50,4 @@ def edit_task(task_id):
             task.task_point = updated_score
             task.date = datetime.datetime.now()
             db.session.commit()
-            return {
-                "success": True,
-                "message": "edit success"
-            }
+            return redirect("/")
