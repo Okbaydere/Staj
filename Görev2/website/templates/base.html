@@ -74,7 +74,7 @@ $('#sort').DataTable();
 <script type="text/javascript">
     $('#addTask').submit(function AddTask() {
         $.ajax({
-            url: 'http://127.0.0.1:5000/',
+            url: 'http://192.168.1.84:5000/',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -96,7 +96,7 @@ $('#sort').DataTable();
 <script type="text/javascript">
     $('#updateNote').submit(function updateTask() {
         $.ajax({
-            url: 'http://127.0.0.1:5000/edit/',
+            url: 'http://192.168.1.84:5000/edit/',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -120,7 +120,7 @@ $('#sort').DataTable();
         const remove = $(this);
         $.ajax({
             type: 'DELETE',
-            url: 'http://127.0.0.1:5000/delete/' + remove.data('source'),
+            url: 'http://192.168.1.84:5000/delete/' + remove.data('source'),
             success: function (res) {
                 console.log(res.response)
                 location.reload();
