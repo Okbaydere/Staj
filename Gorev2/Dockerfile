@@ -1,14 +1,7 @@
 FROM python:3.9
-LABEL version="1.0" \
-     maintainer="Oğuz Kaan" \
-     maintainer.mail="okbaydere@gmail.com"
+COPY requirements.txt /
+RUN pip install -r /requirements.txt
+COPY . /app
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
 EXPOSE 5000
-CMD ["website/models.py"]
-CMD ["python","main.py"]
-
-
-
+CMD [ "python", "main.py" ]
