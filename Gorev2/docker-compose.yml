@@ -8,6 +8,7 @@ services:
     command: --init-file /data/application/init.sql
     volumes:
       - ./init.sql:/data/application/init.sql
+      - db_volume:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: deneme
       MYSQL_DATABASE: todo
