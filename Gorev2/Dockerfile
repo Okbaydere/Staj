@@ -1,8 +1,9 @@
-FROM python:3.9
-COPY requirements.txt /
-RUN pip install -r /requirements.txt
-RUN pip install mysqlclient
-COPY . /app
+FROM python:3.8
 WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+RUN pip install mysqlclient
+COPY main.py .
+COPY . .
 EXPOSE 5000
-CMD [ "python", "main.py" ]
+CMD python main.py

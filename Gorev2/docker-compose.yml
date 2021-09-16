@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+  database:
+    container_name: mysql
+    image: mysql:latest
+    ports:
+      - "32000:3306"
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./init.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: deneme
+      MYSQL_DATABASE: todo
+      MYSQL_PASSWORD: deneme
+      MYSQL_HOST: mysql
+    networks:
+      - backend
+  app:
+    build: ./
+    links:
+      - database
+    networks:
+      - backend
+    ports:
+      - "5000:5000"
+
+networks:
+  backend:
+    driver: "bridge"
+
+volumes:
+  db_volume:
