@@ -1,0 +1,8 @@
+setup:
+  addons:
+    -plan: cleardb-ignite
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: npm start
