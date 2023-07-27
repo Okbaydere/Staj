@@ -1,6 +1,6 @@
 import sqlite3 as sql
 
-con = sql.connect('tasklist.db')
+con = sql.connect('gorevlistesi.db')
 con.execute("PRAGMA foreign_keys = 1")
 cursor = con.cursor()
 
