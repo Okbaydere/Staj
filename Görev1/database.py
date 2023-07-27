@@ -1,9 +1,8 @@
 import sqlite3 as sql
 
-con = sql.connect('gorevlistesi.db')
+con = sql.connect('tasklist.db')
 con.execute("PRAGMA foreign_keys = 1")
 cursor = con.cursor()
-
 
 def create_table():
     cursor.execute \
@@ -23,25 +22,22 @@ def create_table():
          "FOREIGN KEY (user_id) REFERENCES member(Id))")
     con.commit()
 
-
 create_table()
 
-
 def add_user_data(user_name, user_password):
-    con = sql.connect('gorevlistesi.db')
+    con = sql.connect('tasklist.db')
     cursor = con.cursor()
     try:
         add = "INSERT INTO member(user_name, user_password) VALUES ('{}','{}') "
         cursor.execute(add.format(user_name, user_password))
         con.commit()
     except:
-        print("Aynı isimde farklı bir üye var!")
+        print("A member with the same name already exists!")
 
     con.close()
 
-
 def add_task_data(task_name, task_point, member):
-    con = sql.connect('gorevlistesi.db')
+    con = sql.connect('tasklist.db')
     cursor = con.cursor()
     idg = is_user_exist(member)
 
@@ -50,22 +46,16 @@ def add_task_data(task_name, task_point, member):
     con.commit()
     con.close()
 
-
-
-
-
-
-def delete_task(task_Id):  # Görev Sil
-    con = sql.connect('gorevlistesi.db')
+def delete_task(task_Id):
+    con = sql.connect('tasklist.db')
     cursor = con.cursor()
     delete = "DELETE FROM task WHERE Id = '{}' "
     cursor.execute(delete.format(task_Id))
     con.commit()
     con.close()
 
-
 def is_user_exist(user_name):
-    con = sql.connect('gorevlistesi.db')
+    con = sql.connect('tasklist.db')
     cursor = con.cursor()
     search = "SELECT * FROM member WHERE user_name = '{}'"
     cursor.execute(search.format(user_name))
@@ -73,9 +63,8 @@ def is_user_exist(user_name):
     con.close()
     return user
 
-
 def list_by_point(control):
-    con = sql.connect('gorevlistesi.db')
+    con = sql.connect('tasklist.db')
     cursor = con.cursor()
 
     listing = "SELECT task_name,task_point FROM task WHERE user_id = '{}' ORDER BY task_point"
@@ -85,9 +74,8 @@ def list_by_point(control):
         print(i)
     con.close()
 
-
 def list_by_date(control):
-    con = sql.connect('gorevlistesi.db')
+    con = sql.connect('tasklist.db')
     cursor = con.cursor()
 
     listing = "SELECT task_name,task_date FROM task WHERE user_id = '{}' ORDER BY datetime()"
@@ -98,7 +86,7 @@ def list_by_date(control):
     con.close()
 
 def show_id(control):
-    con = sql.connect('gorevlistesi.db')
+    con = sql.connect('tasklist.db')
     cursor = con.cursor()
 
     listing = "SELECT Id,task_name FROM task WHERE user_id = '{}'"
