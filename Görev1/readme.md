@@ -1,8 +1,9 @@
-Konsol üzerinden gerçekleştirilen bir TodoApp. </br>
-Kullanıcı kayıt olduktan sonra giriş yapar.</br>
-Daha sonra görev oluşturur ve oluşturduğu göreve puan verir.</br>
-Bunların hepsi database'e kaydedilir. Database olarak SqlLite kullanıldı </br>
-Tarihe ve puana göre sıralayabilir.</br>
-Görevi dilerse silebilir.</br>
+This is a TodoApp performed via the console.</br>
+After the user registers, they can log in.</br>
+Then, the user can create tasks and assign points to them.</br>
+All the data is saved in a database using SqlLite.</br>
+The user can sort the tasks based on the date and points.</br>
+They can also choose to delete a task.</br>
 
-Fonksiyonların tamamı database.py'nin içerisinde.
+All functions are inside the 'database.py' file.
+
